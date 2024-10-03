@@ -8,17 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
-    use HasFactory, SoftDeletes;
-    protected $fillable = [
-        'name',
-        'phone_number',
-        'email',
-        'role_id',
-        'hire_date',
-    ];
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
+    use HasFactory;
+    protected $fillable = ['employee_name', 'role', 'phone', 'address', 'hire_date', 'salary'];
 }

@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('employee_name');
-            $table->enum('role', ['Operator', 'Supervisor', 'Admin', 'Driver']);
-            $table->string('phone');
-            $table->string('address');
-            $table->date('hire_date');
-            $table->decimal('salary', 15, 2);
+            $table->foreignId('invoice_id')->constrained('invoices');
+            $table->date('payment_date');
+            $table->decimal('amount_paid', 15, 2);
+            $table->enum('payment_method', ['Transfer', 'Cash', 'Credit Card']);
+            $table->enum('payment_status', ['Pending', 'Completed']);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('payments');
     }
 };

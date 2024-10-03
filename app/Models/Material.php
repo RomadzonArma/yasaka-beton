@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Material extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    protected $fillable = ['material_name', 'quantity', 'unit', 'supplier_id', 'last_update'];
 
-    protected $fillable = [
-        'material_name',
-        'purchase_price',
-        'stock_quantity',
-    ];
+    public function supplier() {
+        return $this->belongsTo(Supplier::class);
+    }
 }
